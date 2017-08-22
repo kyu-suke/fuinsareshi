@@ -16,7 +16,7 @@ func main() {
 	e := echo.New()
 	router.SetupV1(e)
 
-	// setting.Ips にハートビート
+	// i setting.Ips にハートビート
 	ips, _ := utilip.Hosts(setting.Subnet)
 	go daemon.HeartBeat(ips)
 
