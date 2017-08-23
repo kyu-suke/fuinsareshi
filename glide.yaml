@@ -8,3 +8,5 @@ import:
   - color
   - log
 - package: github.com/jarcoal/httpmock
+- package: github.com/elazarl/goproxy
+  version: ^1.0.0

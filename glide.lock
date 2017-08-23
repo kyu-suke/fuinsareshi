@@ -1,6 +1,8 @@
-hash: 7dba1bbbf4e9ef2f61187fe01ec139d20c6d3ceedb094c74e3cfddf28ee9e34c
-updated: 2017-08-09T20:32:55.660843481+09:00
+hash: ed7207024312b2bc7427cd88d85a050feaee9b88688a448ffa113c4bd15f1a8b
+updated: 2017-08-23T20:18:04.920636732+09:00
 imports:
+- name: github.com/elazarl/goproxy
+  version: 0a5b8bdb09049ae4ae68e75437ded0b7a2e324e3
 - name: github.com/jarcoal/httpmock
   version: 4442edb3db31196622da56482fd8d0fa375fba4d
 - name: github.com/labstack/echo

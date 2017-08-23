@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"github.com/kyu-suke/fuinsareshi/setting"
 	"fmt"
+	"time"
 )
 
 type Client struct {
@@ -15,7 +16,10 @@ type Client struct {
 func GetHeartBeat(host string) (bool, error) {
 
 	// request get
-	r, err := http.Get(fmt.Sprintf("http://%s/v1/heartbeat", host))
+	httpClient := http.Client{
+		Timeout: time.Duration(time.Second * 1),
+	}
+	r, err := httpClient.Get(fmt.Sprintf("http://%s/v1/heartbeat", host))
 	if err != nil {
 		return false, err
 	}

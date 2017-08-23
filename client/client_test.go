@@ -25,3 +25,17 @@ func TestGetHeartBeat(t *testing.T) {
 	}
 	fmt.Println(r)
 }
+
+func Testタイムアウト確認(t *testing.T) {
+
+	setting.GroupName = "default"
+	r, err := GetHeartBeat("google.com:9999")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	if r == true {
+		t.Fatal("falseになるはずなのにtrueになっているよ！")
+	}
+	fmt.Println(r)
+}
