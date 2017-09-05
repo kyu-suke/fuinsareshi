@@ -1,10 +1,9 @@
 package: github.com/kyu-suke/fuinsareshi
 import:
 - package: github.com/labstack/echo
-  version: ^3.2.1
-- package: github.com/labstack/gommon
-  version: ^0.2.2
-  subpackages:
-  - color
-  - log
+  version: ~3.2.3
+  vcs: git
+- package: github.com/elazarl/goproxy
+  version: aacba83f36a55ac31cbb71c06547a328c0cd1604
+testImport:
 - package: github.com/jarcoal/httpmock

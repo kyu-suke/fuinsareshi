@@ -20,7 +20,6 @@ func main() {
 	ips, _ := utilip.Hosts(setting.Subnet)
 	go daemon.HeartBeat(ips)
 
-
 	e.Logger.Fatal(e.Start(":8080"))
 }
 
