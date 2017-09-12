@@ -5,5 +5,4 @@ import:
   vcs: git
 - package: github.com/elazarl/goproxy
   version: aacba83f36a55ac31cbb71c06547a328c0cd1604
-testImport:
 - package: github.com/jarcoal/httpmock
