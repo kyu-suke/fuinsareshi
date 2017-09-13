@@ -7,6 +7,8 @@ import (
 	"fmt"
 
 	"net/http"
+
+	"github.com/kyu-suke/fuinsareshi/consts"
 )
 
 func TestProxy(t *testing.T) {
@@ -14,7 +16,7 @@ func TestProxy(t *testing.T) {
 	go Proxy()
 
 	http.HandleFunc("/", handler)
-	go http.ListenAndServe(":8080", nil)
+	go http.ListenAndServe(consts.Port, nil)
 
 	c := http.Client{}
 	resp, err := c.Get("http://localhost:8080")
