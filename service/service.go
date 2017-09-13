@@ -12,7 +12,7 @@ func Proxy() {
 
 	director := func(request *http.Request) {
 		request.URL.Scheme = "http"
-		request.URL.Host = ":80"
+		request.URL.Host = ":8080"
 	}
 	modifyResponse := func(response *http.Response) error {
 		//r, _ := ioutil.ReadAll(response.Body)

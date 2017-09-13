@@ -1,19 +1,46 @@
 package service
 
 import (
-	"github.com/jarcoal/httpmock"
+	"io/ioutil"
 	"testing"
+
+	"fmt"
+
+	"net/http"
 )
 
 func TestProxy(t *testing.T) {
-	Proxy()
 
-	httpmock.Activate()
-	defer httpmock.DeactivateAndReset()
+	go Proxy()
 
-	httpmock.RegisterResponder("GET", "http://localhost:8081/v1/heartbeat",
-		httpmock.NewStringResponder(200, `{"group":"default"}`))
-	// どっか適当なページにリクエスト送る httpmock
-	// prosy経由で:9090にリクエスト送る
-	// レスポンス確認する
+	http.HandleFunc("/", handler) // ハンドラを登録してウェブページを表示させる
+	go http.ListenAndServe(":8080", nil)
+
+	c := http.Client{}
+	resp, err := c.Get("http://localhost:8080")
+	if err != nil {
+		t.Fatal("url変です")
+	}
+	r, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		t.Fatal("レスポンス変です")
+	}
+
+	proxyClient := http.Client{}
+	proxyResp, err := proxyClient.Get("http://localhost:9000")
+	if err != nil {
+		t.Fatal("url変です")
+	}
+	proxyResult, err := ioutil.ReadAll(proxyResp.Body)
+	if err != nil {
+		t.Fatal("レスポンス変です")
+	}
+
+	if string(r) != string(proxyResult) {
+		t.Fatal("レスポンスがちがいます")
+	}
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, World")
 }
