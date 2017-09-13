@@ -13,7 +13,7 @@ func TestProxy(t *testing.T) {
 
 	go Proxy()
 
-	http.HandleFunc("/", handler) // ハンドラを登録してウェブページを表示させる
+	http.HandleFunc("/", handler)
 	go http.ListenAndServe(":8080", nil)
 
 	c := http.Client{}

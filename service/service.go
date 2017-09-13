@@ -4,8 +4,6 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
-	//"fmt"
-	//"io/ioutil"
 )
 
 func Proxy() {
@@ -14,18 +12,8 @@ func Proxy() {
 		request.URL.Scheme = "http"
 		request.URL.Host = ":8080"
 	}
-	modifyResponse := func(response *http.Response) error {
-		//r, _ := ioutil.ReadAll(response.Body)
-		//fmt.Println(string(r))
-		//fmt.Println(response.StatusCode)
-		//for k, v := range response.Header {
-		//	fmt.Println(k, v)
-		//}
-		return nil
-	}
 	rp := &httputil.ReverseProxy{
-		Director:       director,
-		ModifyResponse: modifyResponse,
+		Director: director,
 	}
 	server := http.Server{
 		Addr:    ":9000",
