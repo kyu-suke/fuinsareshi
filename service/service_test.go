@@ -1,8 +1,6 @@
 package service
 
 import (
-	"bytes"
-	"io"
 	"io/ioutil"
 	"testing"
 
@@ -51,11 +49,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func Test中間処理加えるテスト(t *testing.T) {
 	funcBody := ""
-	InsertionFunc.Statusok(func(r *http.Response) error {
-		buf := new(bytes.Buffer)
-		reader := io.TeeReader(r.Body, buf)
-		r.Body = ioutil.NopCloser(buf)
-		body, err := ioutil.ReadAll(reader)
+	InsertionFuncs.Statusok(func(r *http.Response) error {
+		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			t.Fatal("エラーです")
 		}
@@ -77,11 +72,8 @@ func Test中間処理加えるテスト(t *testing.T) {
 		t.Fatal("結果がおかしいです")
 	}
 
-	InsertionFunc.StatusNotFound(func(r *http.Response) error {
-		buf := new(bytes.Buffer)
-		reader := io.TeeReader(r.Body, buf)
-		r.Body = ioutil.NopCloser(buf)
-		body, err := ioutil.ReadAll(reader)
+	InsertionFuncs.StatusNotFound(func(r *http.Response) error {
+		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			t.Fatal("エラーです")
 		}
